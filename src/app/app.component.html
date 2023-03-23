@@ -5,22 +5,22 @@
     <div class="col-md-12">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Enter Your Task" aria-describedby="button-addon2"
-          #taskUser>
-        <button class="btn btn-outline-primary" (click)="addTask(taskUser.value)" type="button" id="button-addon2">Add
-          Task</button>
+          [(ngModel)]="inputVal">
+        <button class="btn btn-outline-primary" (click)="addTask()" type="button" id="button-addon2"> Add Task</button>
       </div>
     </div>
   </div>
-  <div>
-    <table class="table bg-dark text-light" *ngFor="let data of listUserTask">
-      <tr>
-        <td>{{data.id + 1}} Task</td>
-        <td>{{data.task}}</td>
-        <td><button class="btn btn-outline-danger m-3 text-center w-50" (click)="removeTask(data.id)"><i
-              class="fa-solid fa-x fa-sm text-light"></i></button></td>
-        <td><button class="btn btn-outline-success m-3 text-center w-50" (click)="doneTask(data.id)"><i
-              class="fa-solid fa-check fa-sm text-light"></i></button></td>
-      </tr>
-    </table>
+</div>
+
+<div class="container bg-warning" *ngFor="let data of listUserTask; let i = index">
+  <div class="row d-flex align-items-center text-center">
+    <div class="col-md-4 col-12"><button class="btn btn-outline-info m-3 text-center" (click)="editable(i)"><i class="fa-solid fa-pen"></i></button></div>
+    <div class="col-md-4 col-12 text-light h4"><input type="text" id="i{{i}}" value='{{data.task}}'
+        [style]="styleOfinput" [disabled]="data.Isdis" #inp></div>
+    <div class="col-md-4 col-12">
+      <button class="btn btn-outline-danger m-3 text-center" (click)="removeTask(data.id)"><i
+          class="fa-solid fa-x fa-sm"></i></button>
+      <button class="btn m-3 text-center" (click)="done(i)"><i class="fa-solid fa-check"></i></button>
+    </div>
   </div>
 </div>

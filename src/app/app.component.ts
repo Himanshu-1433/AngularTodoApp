@@ -8,16 +8,36 @@ import { BrowserModule } from '@angular/platform-browser';
   styleUrls: ['./app.component.css']
 })
 export class MyComponent {
-  listUserTask: any[] = [];
-  addTask(value: string) {
-    this.listUserTask.push({ id: this.listUserTask.length, task: value })
-    console.log(this.listUserTask);
+  btnStatus: String = "btn-outline-primary";
+  inputVal: String = "";
+  styleOfinput: String = "background: transparent; text-align:center; outline: none; border: none;";
+  listUserTask: Array<{ id: number, task: String , Isdis : Boolean }> = [];
+  addTask() {
+    if (this.inputVal == "" || this.inputVal == " ") {
+      alert("please enter some task");
+    }
+    else {
+      this.listUserTask.push({ id: this.listUserTask.length, task: this.inputVal , Isdis: true})
+      console.log(this.listUserTask);
+      this.inputVal = "";
+    }
   }
   removeTask(id: Number) {
     this.listUserTask = this.listUserTask.filter(i => i.id !== id);
   }
-  doneTask(id: Number) {
-    taskUser : String;
-    console.log()
+  editable(id : Number) {
+    console.log(id);
+    this.listUserTask.map((array ,index) => {
+      if(index == id) {
+        array.Isdis = !array.Isdis;
+      }
+      return array;
+    }); 
+  }
+  done(id : Number) {
+    this.listUserTask.map((arrEle , index) => {
+      
+    })    
+    console.log("clicked");
   }
 }
